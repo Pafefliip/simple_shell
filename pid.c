@@ -2,11 +2,11 @@
 
 int main(void)
 {
-        pid_t ourPid;
+	pid_t ourPid;
 
-        ourPid = getpid();
+	ourPid = getpid();
 
-        printf("this is our pid: %u\n", ourPid);
+	printf("this is our pid: %u\n", ourPid);
 
-        return (0);
+	return (0);
 }
