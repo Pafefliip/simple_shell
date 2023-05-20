@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdio.h>
 #include "shell.h"
+#include <strings.h>
 
 /**
  * This function serves as the entry point for the shell program.

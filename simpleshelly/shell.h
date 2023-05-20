@@ -5,6 +5,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <string.h>
+
+#define MAX_ARGS 10
 
 void prompt(char **argv, char **env);
 
