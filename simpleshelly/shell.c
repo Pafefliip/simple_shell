@@ -3,8 +3,6 @@
 #include "shell.h"
 
 /**
- * @brief Entry point of the program.
- *
  * This function serves as the entry point for the shell program.
  * It calls the `prompt` function if no command-line arguments are provided.
  *
