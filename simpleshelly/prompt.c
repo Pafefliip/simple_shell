@@ -6,6 +6,9 @@
 #include "shell.h"
 
 /**
+ *@param argc The number of command-line arguments.
+ *@param argv An array of command-line argument strings.
+ *@param env An environment string.
  *include the main function
  *in case of failure of the child process it returns -1
  *execve executes the command given by user
