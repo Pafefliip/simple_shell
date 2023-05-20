@@ -1,18 +1,11 @@
-#ifndef _SHELL_H_
-#define _SHELL_H_
+#ifndef SHELL_H
+#define SHELL_H
 
 #include <stdio.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
 #include <stdlib.h>
-#include <strings.h>
-#include <fcntl.h>
-#include <dirent.h>
-#include <signal.h>
+#include <unistd.h>
+#include <sys/wait.h>
 
-#define MAX_COMMAND 20
-
-void prompt(char **av, char **env)
+void prompt(char **argv, char **env);
 
 #endif
