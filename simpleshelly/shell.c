@@ -13,7 +13,7 @@
  * @return The exit status of the program.
  */
 
-int main(int argc, char **argv, char **env)
+int main(int argc, char **av, char **env)
 {
 	if (argc == 1)
 	{

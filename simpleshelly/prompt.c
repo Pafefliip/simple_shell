@@ -17,7 +17,7 @@
  *child process will carry out the execution of the command
  *forking the child process
  */
-void prompt(char **argv, char **env)
+void prompt(char **av, char **env)
 {
 	char *string = NULL;
 	size_t s = 0;
