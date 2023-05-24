@@ -1,16 +1,22 @@
 #include "shell.h"
 #include <string.h>
 #include <stdlib.h>
+#include "shell.h"
 
 char *_strcat(char *dest, const char *src)
 {
-	size_t dest_len = strlen(dest);
-	size_t i;
+    char *temp = dest;
 
-	for (i = 0; src[i] != '\0'; i++)
-		dest[dest_len + i] = src[i];
+    while (*temp)
+        temp++;
 
-	dest[dest_len + i] = '\0';
+    while (*src)
+    {
+        *temp = *src;
+        temp++;
+        src++;
+    }
 
-	return dest;
+    *temp = '\0';
+    return dest;
 }

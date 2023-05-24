@@ -1,15 +1,15 @@
+#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+#include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <string.h>
 #include "shell.h"
 
 /**
- * prompt - Displays the prompt and waits for user input to execute commands.
- * @argv: An array of command-line argument strings.
- * @env: An array of environment strings.
+ * prompt - Display the shell prompt and execute commands
+ * @argv: The command-line arguments (unused)
+ * @env: The environment variables
  */
 void prompt(char **argv, char **env)
 {
@@ -20,8 +20,6 @@ void prompt(char **argv, char **env)
 	int status;
 	int a;
 	char *command;
-	char *path;
-	int found;
 
 	while (1)
 	{
@@ -42,27 +40,43 @@ void prompt(char **argv, char **env)
 			}
 			a++;
 		}
-		argv[0] = string;
+
+		/* Tokenize the command and arguments */
+		int numArgs = 0;
+		char *token;
+		char *arguments[MAX_ARGS + 2]; /* +2 for command and NULL terminator */
+
+		token = strtok(string, " ");
+		while (token != NULL && numArgs < MAX_ARGS + 1)
+		{
+			arguments[numArgs++] = token;
+			token = strtok(NULL, " ");
+		}
+		arguments[numArgs] = NULL;
+
+		if (numArgs == 0)
+			continue;
 
 		/* Check if it is a built-in command */
-		if (strcmp(argv[0], "exit") == 0)
+		if (strcmp(arguments[0], "exit") == 0)
 		{
 			exit_shell();
 		}
-		else if (strcmp(argv[0], "env") == 0)
+		else if (strcmp(arguments[0], "env") == 0)
 		{
 			print_environment(env);
 			continue;
 		}
 
 		/* Check if the command exists in the PATH */
-		found = 0;
+		char *path;
+		int found = 0;
 
 		path = strtok(getenv("PATH"), ":");
 		while (path != NULL)
 		{
-			command = malloc(strlen(path) + strlen(argv[0]) + 2);
-			sprintf(command, "%s/%s", path, argv[0]);
+			command = malloc(strlen(path) + strlen(arguments[0]) + 2);
+			sprintf(command, "%s/%s", path, arguments[0]);
 			if (access(command, X_OK) == 0)
 			{
 				found = 1;
@@ -74,7 +88,7 @@ void prompt(char **argv, char **env)
 
 		if (!found)
 		{
-			printf("%s: command not found\n", argv[0]);
+			printf("%s: command not found\n", arguments[0]);
 			continue;
 		}
 
@@ -86,9 +100,9 @@ void prompt(char **argv, char **env)
 		}
 		else if (our_pid == 0)
 		{
-			if (execve(command, argv, env) == -1)
+			if (execve(command, arguments, env) == -1)
 			{
-				printf("%s: No such file or directory\n", argv[0]);
+				printf("%s: No such file or directory\n", arguments[0]);
 				exit(EXIT_FAILURE);
 			}
 		}
@@ -98,27 +112,5 @@ void prompt(char **argv, char **env)
 		}
 
 		free(command);
-	}
-}
-
-/**
- * exit_shell - Exits the shell program.
- */
-void exit_shell(void)
-{
-	exit(EXIT_SUCCESS);
-}
-
-/**
- * print_environment - Prints the current environment.
- * @env: An array of environment strings.
- */
-void print_environment(char **env)
-{
-	int i = 0;
-	while (env[i] != NULL)
-	{
-		printf("%s\n", env[i]);
-		i++;
 	}
 }

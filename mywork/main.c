@@ -16,11 +16,14 @@ int main(void)
 	size_t bufsize = 0;
 	ssize_t charNum;
 	char **string;
+	int nbut, qr;
+	char *mb;
 
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-			printf("simpleShelly $ ");
+		printf("simple_shell $ ");
+		
 		charNum = getline(&line, &bufsize, stdin);
 		if (charNum == -1)
 		{
@@ -32,15 +35,15 @@ int main(void)
 			string = chastrtokn(line);
 			if (_strcmp("exit", string[0]) == 0)
 				break;
-			int nbut = inbuilty(string[0]);
-			char *mb = checkerF(string[0]);
+			nbut = inbuilty(string[0]);
+			mb = checkerF(string[0]);
 			if (nbut == 0 && mb != NULL)
 				string[0] = mb;
-			int qr = pathyF(string[0]);
+			qr = pathyF(string[0]);
 			if (qr == 1)
 				execForky(string);
 			if (mb == NULL && qr == 0 && nbut == 0)
-				printf("./shell: No such directory or file\n");
+				printf("simple_shell: command not found: %s\n", string[0]);
 		}
 	}
 

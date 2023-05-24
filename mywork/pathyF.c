@@ -12,40 +12,17 @@
 int pathyF(char *stringer)
 {
 	const char *comP = "/bin/";
-	char *pointer;
-	int b = 0, m = 0;
+	size_t prefix_len = strlen(comP);
 
-	pointer = malloc(sizeof(char) * (strlen(stringer) + 1));
-	if (pointer == NULL)
+	if (strlen(stringer) <= prefix_len)
+		return 0;
+	
+	if (strncmp(comP, stringer, prefix_len) == 0)
 	{
-		perror("Memory allocation error");
-		exit(EXIT_FAILURE);
+		char *command = stringer + prefix_len;
+		if (checkerF(command) != NULL)
+			return 1;
 	}
 
-	while (comP[b] != '\0')
-	{
-		if (comP[b] != stringer[b])
-		{
-			free(pointer);
-			return 0;
-		}
-		b++;
-	}
-
-	while (stringer[b] != '\0')
-	{
-		pointer[m] = stringer[b];
-		m++;
-		b++;
-	}
-	pointer[m] = '\0';
-
-	if (checkerF(pointer) != NULL)
-	{
-		free(pointer);
-		return 1;
-	}
-
-	free(pointer);
 	return 0;
 }

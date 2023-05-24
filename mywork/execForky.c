@@ -9,29 +9,34 @@
  * execForky - system execution with fork
  * @star: array of strings gotten from line command
  */
+#include "shell.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
-void execForky(char **star)
+void execForky(char **stringer)
 {
-	pid_t pid;
+	pid_t our_pid;
 	int status;
 
-	pid = fork();
-	if (pid < 0)
+	our_pid = fork();
+	if (our_pid == -1)
 	{
-		perror("fork error");
-		return;
+		perror("Fork failed");
+		exit(EXIT_FAILURE);
 	}
-
-	if (pid == 0)
+	if (our_pid == 0)
 	{
-		if (execvp(star[0], star) == -1)
+		if (execve(stringer[0], stringer, NULL) == -1)
 		{
-			perror("./shell: No such directory or file");
+			perror("Execve failed");
 			exit(EXIT_FAILURE);
 		}
 	}
 	else
 	{
-	waitpid(pid, &status, 0);
+		wait(&status);
 	}
 }

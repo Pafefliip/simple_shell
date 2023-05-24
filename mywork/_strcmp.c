@@ -1,13 +1,13 @@
 #include "shell.h"
 #include <string.h>
 
-int _strcmp(const char *str1, const char *str2)
+int _strcmp(const char *s1, const char *s2)
 {
-	while (*str1 && (*str1 == *str2))
+	while (*s1 && (*s1 == *s2))
 	{
-		str1++;
-		str2++;
+		s1++;
+		s2++;
 	}
 
-	return *(unsigned char *)str1 - *(unsigned char *)str2;
+	return *(unsigned char *)s1 - *(unsigned char *)s2;
 }

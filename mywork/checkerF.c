@@ -34,7 +34,6 @@ char *checkerF(char *stringer)
 		}
 		enty = readdir(dirc);
 	}
-
 	closedir(dirc);
 	return NULL;
 }
