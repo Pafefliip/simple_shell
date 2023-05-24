@@ -1,22 +1,31 @@
 #ifndef SHELL_H
 #define SHELL_H
 
-/**
- * prompt - Displays the prompt and waits for user input to execute commands.
- * @argv: An array of command-line argument strings.
- * @env: An array of environment strings.
+/*
+ * Function: display_prompt
+ * ------------------------
+ * Displays the shell prompt.
  */
-void prompt(char **argv, char **env);
+void display_prompt(void);
 
-/**
- * exit_shell - Exits the shell program.
+/*
+ * Function: read_command
+ * ----------------------
+ * Reads a command entered by the user.
+ *
+ * Returns:
+ *   - The command entered by the user as a string.
+ *   - NULL if the end of file (Ctrl+D) is reached.
  */
-void exit_shell(void);
+char *read_command(void);
 
-/**
- * print_environment - Prints the current environment.
- * @env: An array of environment strings.
+/*
+ * Function: execute_command
+ * -------------------------
+ * Executes the given command.
+ *
+ * command: The command to be executed.
  */
-void print_environment(char **env);
+void execute_command(char *command);
 
-#endif
+#endif /* SHELL_H */
