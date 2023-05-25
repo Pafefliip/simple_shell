@@ -28,7 +28,7 @@ void prompt(char **av, char **env)
 
 	while (1)
 	{
-		printf("simpleShelly $ ");
+		printf("#cisfun$ ");
 		charNum = getline(&string, &s, stdin);
 		if (charNum == -1)
 		{
