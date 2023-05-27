@@ -1,5 +1,11 @@
 #include "shell.h"
-
+/**
+ * _divider - Function to divide a string into tokens based on a delimiter
+ *@pLiner: is a linepointer
+ *@nToken: number of token
+ *@myDelimeter: the delimeter
+ *return: on failure NULL on success dynamically allocated array of strings
+ */
 char **_divider(int nToken, char *pLiner, const char *myDelimeter)
 {
 	char **tokMan = NULL;
